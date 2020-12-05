@@ -27,7 +27,9 @@ public class MenuService {
     public Page<Menu> getPage(FilterMenuRequest request) {
         String keyword = request.getKeyword();
         Pageable pageable = request.buildPage();
-        Specification<Menu> spec = nameLike(keyword).or(descriptionLike(keyword));
+        Specification<Menu> spec = (nameLike(keyword))
+            .or(descriptionLike(keyword));
+
         return menuRepository.findAll(spec, pageable);
     }
 
