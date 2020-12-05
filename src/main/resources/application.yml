@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://35.247.133.74:3306/blog
+    username: root
+    password: open
+
+    hikari:
+      connection-timeout: 30000
+      maximum-pool-size: 10
+  
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
