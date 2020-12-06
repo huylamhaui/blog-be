@@ -15,7 +15,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 
 public class JwtService {
     
-    private static final String SECRET = "";
+    private static final String SECRET = "NIETBAN";
     private static final long EXPIRE_TIME = 8 * 60 * 60 * 1000;
 
     public static String generateToken(Authentication auth) {
