@@ -8,13 +8,15 @@ import javax.persistence.Table;
 import org.hibernate.validator.constraints.Length;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
 @Entity
 @Table(name = "menu")
-public class Menu {
+public class Menu extends BaseEntity{
 
     @Id
     private String ID;
@@ -26,4 +28,5 @@ public class Menu {
     @Column(length = 2024)
     @Length(min = 1, max = 1024)
     private String description;
+
 }
