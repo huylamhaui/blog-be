@@ -7,13 +7,19 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.Length;
+import org.springframework.security.core.GrantedAuthority;
 
 import lombok.Data;
 
 @Data
 @Entity
 @Table(name = "role")
-public class Role {
+public class Role implements GrantedAuthority{
+
+    /**
+     *
+     */
+    private static final long serialVersionUID = 4604708335164431097L;
 
     @Id
     private String ID;
@@ -30,6 +36,11 @@ public class Role {
     @PrePersist
     private void preSave() {
         this.name = this.name.toUpperCase().trim();
+    }
+
+    @Override
+    public String getAuthority() {
+        return getName();
     }
     
 }
