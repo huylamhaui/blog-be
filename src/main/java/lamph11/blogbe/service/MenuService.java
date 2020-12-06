@@ -3,6 +3,7 @@ package lamph11.blogbe.service;
 import static lamph11.blogbe.service.specifications.MenuSpecification.descriptionLike;
 import static lamph11.blogbe.service.specifications.MenuSpecification.nameLike;
 
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.data.domain.Page;
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import lamph11.blogbe.dto.CreateMenuRequest;
 import lamph11.blogbe.dto.FilterMenuRequest;
+import lamph11.blogbe.dto.UpdateMenuRequest;
 import lamph11.blogbe.entity.Menu;
 import lamph11.blogbe.repository.MenuRepository;
 import lombok.AllArgsConstructor;
@@ -41,5 +43,18 @@ public class MenuService {
             .setDescription(request.getDescription());
         menu = menuRepository.save(menu);
         return menu;
+    }
+
+
+
+    public Menu update(UpdateMenuRequest request) {
+        Optional<Menu> optional = menuRepository.findById(request.getId());
+        if(!optional.isPresent())
+            throw new RuntimeException("menu not found");
+        
+        Menu menu = optional.get()
+            .setName(request.getName())
+            .setDescription(request.getDescription());
+        return menuRepository.save(menu);
     }
 }

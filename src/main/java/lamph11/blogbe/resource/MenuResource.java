@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,6 +16,7 @@ import lamph11.blogbe.common.ApiResponse;
 import lamph11.blogbe.common.ResponseUtils;
 import lamph11.blogbe.dto.CreateMenuRequest;
 import lamph11.blogbe.dto.FilterMenuRequest;
+import lamph11.blogbe.dto.UpdateMenuRequest;
 import lamph11.blogbe.entity.Menu;
 import lamph11.blogbe.service.MenuService;
 import lombok.AllArgsConstructor;
@@ -40,6 +42,16 @@ public class MenuResource {
     public ResponseEntity<ApiResponse> create(@Valid @RequestBody CreateMenuRequest request) {
         try {
             Menu menu = menuService.create(request);
+            return ResponseEntity.ok(ResponseUtils.success(menu));
+        } catch (Throwable t) {
+            return ResponseEntity.ok(ResponseUtils.error(t));
+        }
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<ApiResponse> update(@Valid @RequestBody UpdateMenuRequest request) {
+        try {
+            Menu menu = menuService.update(request);
             return ResponseEntity.ok(ResponseUtils.success(menu));
         } catch (Throwable t) {
             return ResponseEntity.ok(ResponseUtils.error(t));
